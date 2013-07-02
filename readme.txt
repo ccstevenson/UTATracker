@@ -1,0 +1,1 @@
+UTA API user token and Bing Maps credentials have been omitted from the source code.
