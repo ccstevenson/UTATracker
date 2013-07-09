@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UTA_Tracker</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <!-- UTA_Tracker references -->
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+
+    <!-- Bing Map Control references -->
+    <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapicore.js"></script>
+
+</head>
+    <body>
+        <!-- <div id="controldiv">
+            <div id="controls">
+                Route: <input id="route" type="text"/>
+                <input type="submit" id="routeSubmit" value="Submit"/>
+                
+                <span style="display:none;" id="unixtime_coming_0">600</span><span onload='timer()' id="timer_coming_0"></span>
+            </div>
+        </div> -->
+        <div id="mapdiv">
+            <div class="searchContainer">
+                <input class="searchBox" id="searchBox" type="text" placeholder="Route"/>
+                <button class="searchButton" id="searchSubmit" />
+            </div>
+        </div>
+    </body>
+</html>

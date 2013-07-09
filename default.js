@@ -1,7 +1,7 @@
 ﻿// For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkId=232509
 
-var userToken = "<UTAUserTokenGoesHere>";
+var userToken = "UTA user token goes here.";
 var geolocator = new Windows.Devices.Geolocation.Geolocator(); // Used to determine the user's position.
 
 (function () {
@@ -15,36 +15,32 @@ var geolocator = new Windows.Devices.Geolocation.Geolocator(); // Used to determ
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
+
                 // The application has been newly launched. 
                 // Initialize application here.
                 
                 args.setPromise(WinJS.UI.processAll().then(function () {
-                    // After the Maps module is loaded the initMap function will place the Map into the mapdiv element
+                    // After the Maps module is loaded, the initMap function will place the Map into the mapdiv element.
                     Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap });
                 }));
 
-                centerOnUserPosition();
+                var route;
 
-                var route = 704;
-                routeQuery(route);
-
-                setMapZoom();
-
-                document.getElementById('routeSubmit').onclick = function () {
-                    route = document.getElementById('route').value;
+                document.getElementById('searchSubmit').onclick = function () {
+                    route = document.getElementById('searchBox').value;
                     routeQuery(route);
                     setMapZoom();
                 };
                 
                 setInterval(function () {
                     routeQuery(route);
-                    countdown();
+                    // countdown();
                 }, 10500);
                 
             } else {
                 // The application has been reactivated from suspension.
                 // Restore application state here.
-                centerOnUserPosition();
+                routeQuery(route);
             }
         }
     };
@@ -76,7 +72,7 @@ function countdown() {
     var minutes = Math.floor(count / 60) % 60;
     var seconds = count % 60;
 
-    document.getElementById("timer_coming_0").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s"; // watch for spelling
+    document.getElementById("timer_coming_0").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s"; 
 }
 
 function routeQuery(route) {
@@ -129,7 +125,7 @@ function updateMap() {
     
     addUserLocationPin();
 
-    for (var i = 0, len = vehicles.length; i < len; ++i) { // TODO: learn how to use foreach loop with objects.
+    for (var i = 0, len = vehicles.length; i < len; ++i) { 
         var vehicle = vehicles[i];
         console.log(vehicle.vehicleID + ": \n\t" + vehicle.location.latitude + "\n\t" + vehicle.location.longitude + "\n");
         addPushPin(vehicle.location);
@@ -165,13 +161,18 @@ function setMapZoom() {
 function initMap() {
     try {
         var mapOptions = {
-            credentials: "BingMapsCredentialsGoHere",
+            credentials: "Bing SDK credentials go here.",
             center: new Microsoft.Maps.Location(-110, 40), // May want to change default center that will appear if no geolocation data and no Internet data.
             mapTypeId: Microsoft.Maps.MapTypeId.auto,
             zoom: 5
         };
         var mapDiv = document.querySelector("#mapdiv");
         map = new Microsoft.Maps.Map(mapDiv, mapOptions);
+
+        centerOnUserPosition();
+        var route = 830;
+        routeQuery(route);
+        setMapZoom();
     }
     catch (e) {
         var md = new Windows.UI.Popups.MessageDialog(e.message);
@@ -223,7 +224,7 @@ function addUserLocationPin() {
 function addPushPin(location, isUser) {
     // map.entities.clear();
     var pushpin = typeof isUser == 'undefined' ? new Microsoft.Maps.Pushpin(location) :
-        new Microsoft.Maps.Pushpin(location, { icon: "images/BluePushpin.png", width: 50, height: 50 });
+        new Microsoft.Maps.Pushpin(location, { icon: '/images/MagnifyingGlass.png', width: 50, height: 50 });
     map.entities.push(pushpin);
 }
 
